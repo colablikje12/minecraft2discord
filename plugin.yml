@@ -1,0 +1,6 @@
+name: DCLink
+version: ${project.version}
+main: nl.colablikje12.linkdc.DCLink
+api-version: 1.13
+authors: [colablikje12]
+description: Test projectje
