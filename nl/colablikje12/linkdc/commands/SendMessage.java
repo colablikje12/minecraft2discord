@@ -24,14 +24,25 @@ public class SendMessage extends PlayerCommand {
         Common.tell(player, "&4&lERROR! &fDe webhook heb je niet in je config aangemaakt!");
         return;
     }
-        String webhook = Config.lWebhook;
 
-        WebhookClient client = new WebhookClientBuilder(webhook).build();
-        Connect c = new Connect();
+    if (args.length < 1) {
+        Common.tell(player, "&4Error! &fJe moet een bericht opgeven!");
+        return;
+    }
 
-        Connect test = new Connect();
-        Bukkit.getScheduler().runTaskAsynchronously(DCLink.getInstance(), () -> client.send(c.buildMessage()));
-        Common.tell(player, "&4Gelukt! &aHet test bericht is succesvol verstuurd!");
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < args.length; i++) {
+        sb.append(args[i]);
+        sb.append(" ");
+    }
+
+    String msg = sb.toString();
+
+    String webhook = Config.lWebhook;
+    WebhookClient client = new WebhookClientBuilder(webhook).build();
+    Connect c = new Connect(msg, Config.lUrl, Config.lUsername);
+    Bukkit.getScheduler().runTaskAsynchronously(DCLink.getInstance(), () -> client.send(c.buildMessage()));
+    Common.tell(player, "&4Gelukt! &aHet test bericht is succesvol verstuurd!");
 
     }
 }

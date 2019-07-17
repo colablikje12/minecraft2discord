@@ -7,8 +7,15 @@ import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 
 public class Connect {
 
-    String username;
-    String avatarURL;
+    String message;
+    String avatarUrl;
+    String userName;
+
+    public Connect (String message, String avatarUrl, String userName) {
+        this.message = message;
+        this.avatarUrl = avatarUrl;
+        this.userName = userName;
+    }
 
     public WebhookEmbed buildEmbed() {
 
@@ -17,7 +24,7 @@ public class Connect {
         WebhookEmbedBuilder builder = new WebhookEmbedBuilder();
         builder.setColor(0x4896a2);
 
-        builder.addField(new WebhookEmbed.EmbedField(false, "Bericht: ", "Dit is het bericht" ));
+        builder.addField(new WebhookEmbed.EmbedField(false, "Bericht: ", message ));
 
         return builder.build();
     }
@@ -25,8 +32,8 @@ public class Connect {
     public WebhookMessage buildMessage() {
         WebhookMessageBuilder builder = new WebhookMessageBuilder();
         builder.addEmbeds(buildEmbed());
-        builder.setAvatarUrl("https://i.paradaux.io/i/4vvj9.png");
-        builder.setUsername("colablikje12");
+        builder.setAvatarUrl(avatarUrl);
+        builder.setUsername(userName);
 
         return builder.build();
     }
